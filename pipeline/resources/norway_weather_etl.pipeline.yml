@@ -1,0 +1,26 @@
+# Norway Weather ETL – Lakeflow Spark Declarative Pipeline
+# Catalog  : cop_weather_demo
+# Schemas  : silver (default target), gold (overridden in each @dp.materialized_view)
+# Compute  : serverless (Databricks Free Edition compatible)
+
+resources:
+  pipelines:
+    norway_weather_etl:
+      name: norway_weather_etl
+      description: >
+        Norway 8-city weather intelligence pipeline.
+        Reads Bronze API snapshots and produces Silver (normalized) and
+        Gold (ranked) materialized views for the live demo dashboard and Genie Space.
+      catalog: cop_weather_demo
+      target: silver          # default schema; individual MVs override with full 3-part name
+      serverless: true
+      development: false      # set true locally for faster iteration; false for demo run
+      libraries:
+        - file:
+            path: ../src/norway_weather_etl/silver_weather_daily.py
+        - file:
+            path: ../src/norway_weather_etl/silver_air_hourly.py
+        - file:
+            path: ../src/norway_weather_etl/gold_sunshine_14d_rank.py
+        - file:
+            path: ../src/norway_weather_etl/gold_clean_air_rank.py
