@@ -92,6 +92,24 @@ enforces the GO/NO-GO gates between them.
 
 ---
 
+## A0 — Pre-flight: Verify Authentication
+
+Run in terminal:
+
+```bash
+databricks auth status --profile dbx_free
+```
+
+If the output does **not** show `✓ authenticated`, run:
+
+```bash
+databricks auth login --profile dbx_free
+```
+
+Wait for the browser OAuth flow to complete before proceeding.
+
+---
+
 ## A1 — Create All Source Files
 
 The agent creates every file from scratch. The `cop_demo/` folder is currently
@@ -157,7 +175,7 @@ def insert_row(w, wh_id, table, run_ts, city, lat, lon, url, payload):
         f"VALUES (TIMESTAMP '{run_ts}','{city}',{lat},{lon},'{url_esc}','{payload_esc}')"
     )
     res = w.statement_execution.execute_statement(
-        warehouse_id=wh_id, statement=stmt, wait_timeout="50s"
+        warehouse_id=wh_id, statement=stmt, wait_timeout="60s"
     )
     if res.status.state != StatementState.SUCCEEDED:
         raise RuntimeError(f"INSERT failed {city} → {table}: {res.status.error}")
