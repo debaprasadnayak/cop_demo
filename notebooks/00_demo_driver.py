@@ -1,5 +1,5 @@
 # Databricks notebook source
-# Norway Weather Demo - Validation Notebook
+# Norway Weather Demo – Validation Notebook
 # Run cells individually at each gate to spot-check a layer.
 # COMMAND ----------
 CATALOG = "cop_weather_demo"
@@ -24,7 +24,7 @@ display(spark.sql(f"""
   WHERE run_ts = (SELECT MAX(run_ts) FROM {CATALOG}.silver.air_hourly)
 """))  # Expected: 112 rows / 8 cities; ~1344 rows / 8 cities
 # COMMAND ----------
-# Gate 3a - Q1: Sunniest city (14-day forecast)
+# Gate 3a – Q1: Sunniest city (14-day forecast)
 display(spark.sql(f"""
   SELECT rank, city, ROUND(sunshine_hours_14d, 1) AS sunshine_hours_14d
   FROM   {CATALOG}.gold.sunshine_14d_rank
@@ -32,7 +32,7 @@ display(spark.sql(f"""
   ORDER  BY rank
 """))
 # COMMAND ----------
-# Gate 3b - Q2: Cleanest air (7-day horizon)
+# Gate 3b – Q2: Cleanest air (7-day horizon)
 display(spark.sql(f"""
   SELECT rank_pm25, rank_aqi, city,
          ROUND(avg_pm2_5_horizon, 2) AS avg_pm25_ug_m3,
@@ -42,14 +42,14 @@ display(spark.sql(f"""
   ORDER  BY rank_pm25
 """))
 # COMMAND ----------
-# -- POST-DEMO CLEANUP - run cells below individually as needed --
+# ── POST-DEMO CLEANUP – run cells below individually as needed ──
 # COMMAND ----------
 # Option 1: Reset Bronze only (Silver/Gold rebuild automatically on next pipeline run)
 # spark.sql(f"TRUNCATE TABLE {CATALOG}.bronze.openmeteo_weather_raw")
 # spark.sql(f"TRUNCATE TABLE {CATALOG}.bronze.openmeteo_air_raw")
 # print("Bronze truncated. Ready for fresh ingestion.")
 # COMMAND ----------
-# Option 2: Full teardown - drops catalog + all schemas + all tables
+# Option 2: Full teardown – drops catalog + all schemas + all tables
 # spark.sql(f"DROP CATALOG IF EXISTS {CATALOG} CASCADE")
 # print(f"Catalog {CATALOG} dropped.")
 # COMMAND ----------

@@ -1,0 +1,20 @@
+resources:
+  pipelines:
+    norway_weather_etl:
+      name: norway_weather_etl
+      description: >
+        Norway 8-city weather intelligence. Reads Bronze API snapshots and
+        produces Silver (normalised) + Gold (ranked) materialized views.
+      catalog: cop_weather_demo
+      target: silver
+      serverless: true
+      development: false
+      libraries:
+        - file:
+            path: ../src/norway_weather_etl/silver_weather_daily.py
+        - file:
+            path: ../src/norway_weather_etl/silver_air_hourly.py
+        - file:
+            path: ../src/norway_weather_etl/gold_sunshine_14d_rank.py
+        - file:
+            path: ../src/norway_weather_etl/gold_clean_air_rank.py
