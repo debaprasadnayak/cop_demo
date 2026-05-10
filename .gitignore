@@ -1,2 +1,23 @@
+# OS files
+.DS_Store
+*.swp
+*.swo
 
-.databricks
+# IDE
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Databricks
+.databricks/
+.databricks-resources.json
+
+# Development
+.ai-dev-kit/
+cop_demo.worktrees/
+.mcp.json

@@ -1,0 +1,22 @@
+# This is a Databricks asset bundle definition for databricks codespace.
+# The Databricks extension requires databricks.yml configuration file.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
+bundle:
+  name: databricks codespace
+
+include:
+  - cop_demo/pipeline/resources/*.pipeline.yml
+
+targets:
+  dev:
+    mode: production
+    default: true
+    workspace:
+      host: https://dbc-YOUR_INSTANCE_ID.cloud.databricks.com
+
+  ## Optionally, there could be 'staging' or 'prod' targets here.
+  #
+  # prod:
+  #   workspace:
+  #     host: https://dbc-b74acda9-4dbe.cloud.databricks.com

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "comment": "Checks for ai-dev-kit plugin updates at the start of every agent session. Runs silently within a 5-second timeout so it never blocks the session from starting.",
+        "type": "command",
+        "bash": "bash /Users/debanayak/.ai-dev-kit/repo/.claude-plugin/check_update.sh",
+        "powershell": "powershell -NoProfile -File /Users/debanayak/.ai-dev-kit/repo/.claude-plugin/check_update.ps1",
+        "timeoutSec": 5,
+        "cwd": "."
+      }
+    ],
+    "userPromptSubmitted": [
+      {
+        "comment": "Intercepts every prompt before execution and denies any that contain destructive SQL (DROP TABLE/SCHEMA/CATALOG/DATABASE/VIEW, TRUNCATE TABLE, DELETE FROM), dangerous shell commands (rm, rmdir, mkfs, shred, wipefs, fdisk, dd), or destructive git operations (--force push, reset --hard, clean -f). Returns {permissionDecision: deny} with a reason to block; allow otherwise.",
+        "type": "command",
+        "bash": "bash /Users/debanayak/Library/CloudStorage/OneDrive-Capgemini/Code\\ Workspace/databricks\\ codespace/.github/hooks/scripts/validate_commands.sh",
+        "powershell": "powershell -NoProfile -ExecutionPolicy Bypass -File 'C:\\Users\\debanayak\\Library\\CloudStorage\\OneDrive-Capgemini\\Code Workspace\\databricks codespace\\.github\\hooks\\scripts\\validate_commands.ps1'",
+        "cwd": "/Users/debanayak/Library/CloudStorage/OneDrive-Capgemini/Code Workspace/databricks codespace"
+      }
+    ],
+    "preToolUse": [
+      {
+        "comment": "Intercepts every tool call before execution and denies any that contain destructive SQL (DROP TABLE/SCHEMA/CATALOG/DATABASE/VIEW, TRUNCATE TABLE, DELETE FROM), dangerous shell commands (rm, rmdir, mkfs, shred, wipefs, fdisk, dd), or destructive git operations (--force push, reset --hard, clean -f). Returns {permissionDecision: deny} with a reason to block; allow otherwise.",
+        "type": "command",
+        "bash": "bash /Users/debanayak/Library/CloudStorage/OneDrive-Capgemini/Code\\ Workspace/databricks\\ codespace/.github/hooks/scripts/validate_commands.sh",
+        "powershell": "powershell -NoProfile -ExecutionPolicy Bypass -File 'C:\\Users\\debanayak\\Library\\CloudStorage\\OneDrive-Capgemini\\Code Workspace\\databricks codespace\\.github\\hooks\\scripts\\validate_commands.ps1'",
+        "cwd": "/Users/debanayak/Library/CloudStorage/OneDrive-Capgemini/Code Workspace/databricks codespace"
+      }
+    ]
+  }
+}
