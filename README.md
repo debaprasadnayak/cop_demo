@@ -128,6 +128,21 @@ How `sessionStart` relates to MCP updates:
 - This updates/checks ai-dev-kit plugin components used by the workspace tooling.
 - It does not directly rewrite `.mcp.json`; it keeps the local ai-dev-kit integration current so MCP-backed capabilities remain up to date.
 
+## 5) How to use prompt files
+
+Prompt folder:
+- `.github/prompts/`
+
+Current prompt file:
+- `.github/prompts/plan-norwayWeatherLiveDemo.prompt.md`
+
+Quick usage:
+1. Open the prompt file in your editor.
+2. Select **Agents** mode in Copilot Chat.
+3. Click **Run Prompt** from the prompt file or ask copilot to run it with any additional instructions e.g skip GO/NO-GO gates.
+4. Follow GO/NO-GO gates in the prompt and approve each step.
+5. Use `cop_demo/project-docs/norwayWeatherLiveDemo.highlevel-checklist.md` as the live run status tracker.
+
 ## Project demo
 
 For demo run and data pipeline details, see: `cop_demo/README.md`.
